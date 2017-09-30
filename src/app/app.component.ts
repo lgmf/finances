@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private db: AngularFireDatabase) { }
 
   ngOnInit(): void {
-    this.subscription = this.db.list('items/negatives').subscribe(rs => this.items = rs);
+    this.subscription = this.db.list('items').subscribe(rs => this.items = rs);
 
   }
 
