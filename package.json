@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod && firebase deploy"
+    "deploy": "ng build --prod --base-href \"https://finances-2076a.firebaseapp.com/\" && firebase deploy"
   },
   "private": true,
   "dependencies": {
