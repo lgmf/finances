@@ -1,5 +1,4 @@
-<div class="container">
-    <div class="divider"></div>
+<div class="container">    
     <div class="row">
         <div class="offset-m3 col s12 m6">
             <div class="card">
@@ -7,19 +6,19 @@
                     <span class="card-title">Login</span>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate">
-                            <label for="email">Email</label>
+                            <input id="email" type="email" class="validate" required>
+                            <label for="email" data-error="Email inválido">Email</label>
                         </div>
                         <div class="input-field col s12">
-                            <input id="password" type="password" class="validate">
-                            <label for="password">Password</label>
+                            <input id="password" type="password" class="validate" required>                            
+                            <label for="password" data-error="Senha inválida">Senha</label>
                         </div>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="login()">
+                    <button class="btn waves-effect waves-light" (click)="login()">
                         Entrar
                     </button>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" (click)="loginWithGoogle()">
-                        Entrar com google
+                    <button routerLink="/register" class="btn waves-effect waves-light">
+                        Registrar
                     </button>
                 </div>
             </div>
