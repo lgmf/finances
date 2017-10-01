@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MaterializeModule } from 'angular2-materialize';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase, 'finances'),
+    AngularFireAuthModule,
     MaterializeModule,
     FormsModule,
     ReactiveFormsModule

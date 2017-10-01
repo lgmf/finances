@@ -7,17 +7,13 @@ import { toast } from 'angular2-materialize';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
-  providers:[
-    FormBuilder,
-    FormGroup
-  ]
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-
   user: User = new User();
+  showProgress: boolean = false;
 
   constructor(
     public formBuilder: FormBuilder
@@ -34,8 +30,15 @@ export class RegisterComponent implements OnInit {
 
   createUser() {
     if (this.registerForm.invalid) return;
+    this.showProgress = true;
 
-    toast('Cadastrado com sucesso', 2000)
+    var timeout = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        this.showProgress = false;
+        resolve();
+      }, 1500);
+    });
+    
+    timeout.then(() => { toast('Cadastrado com sucesso', 2000) });
   }
-
 }
