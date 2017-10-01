@@ -1,0 +1,9 @@
+<app-header></app-header>
+<div class="container">
+    <ul class="collection with-header">
+        <li class="collection-header">
+            <h6>Numbers List</h6>
+        </li>
+        <li class="collection-item" *ngFor="let item of items">{{ item.$value }}</li>
+    </ul>
+</div>
