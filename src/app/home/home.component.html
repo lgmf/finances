@@ -1,9 +1,9 @@
 <app-header></app-header>
+<div class="progress" *ngIf="showProgress">
+    <div class="indeterminate"></div>
+</div>
 <div class="container">
     <div class="row">
-        <div class="progress" *ngIf="!items?.length">
-            <div class="indeterminate"></div>
-        </div>
         <ul class="collection with-header" *ngIf="items?.length">
             <li class="collection-header">
                 <h6>Numbers List</h6>

@@ -13,6 +13,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
+  showProgress: boolean = false;
   items: number[];
   auth: Subscription;
   getlist: Subscription;
@@ -24,12 +25,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    this.showProgress = true;
     this.auth = this.afAuth.authState.subscribe(user => {
       if (!user) {
         this.router.navigateByUrl('login')
         return;
       }
-      this.getlist = this.db.list(`${user.uid}`).subscribe(rs => this.items = rs);
+      this.getlist = this.db.list(`${user.uid}`).subscribe(rs => {
+        this.items = rs
+        this.showProgress = false;
+      });
     });
   }
 
