@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   user: User = new User();
   showProgress: boolean = false;
+  confirmPassword: string;
 
   constructor(
     public formBuilder: FormBuilder
