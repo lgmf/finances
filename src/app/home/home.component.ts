@@ -1,31 +1,40 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers: [
-    AngularFireDatabase
-  ]
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
   items: number[];
-  subscription: Subscription;
- 
+  auth: Subscription;
+  getlist: Subscription;
+
   constructor(
-    public db: AngularFireDatabase
+    public db: AngularFireDatabase,
+    public afAuth: AngularFireAuth,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.db.list('items/positives').subscribe(rs => this.items = rs);
+    this.auth = this.afAuth.authState.subscribe(user => {
+      if (!user) {
+        this.router.navigateByUrl('login')
+        return;
+      }
+      this.getlist = this.db.list(`${user.uid}`).subscribe(rs => this.items = rs);
+    });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.auth) this.auth.unsubscribe();
+    if (this.getlist) this.getlist.unsubscribe();
   }
 }

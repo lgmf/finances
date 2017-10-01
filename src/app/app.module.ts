@@ -16,7 +16,7 @@ import { NothingFoundComponent } from './nothing-found/nothing-found.component';
 import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
-  { path: 'home/:id', component: HomeComponent },
+  { path: 'home/:uid', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: LoginComponent },
@@ -36,6 +36,7 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AngularFireModule.initializeApp(environment.firebase, 'finances'),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
     MaterializeModule,
     FormsModule,

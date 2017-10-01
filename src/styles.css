@@ -2,12 +2,3 @@
 body {
     background-color: #e4e4e4;
 }
-
-/* Right align toast message */
-#toast-container {
-    min-width: 15%;
-    top: 85vh;
-    right: 5vh;
-}
-
-

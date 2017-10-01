@@ -1,25 +1,32 @@
-<div class="container">    
+<div class="container">
     <div class="row">
         <div class="offset-m3 col s12 m6">
             <div class="card">
+                <div class="progress" *ngIf="showProgress">
+                    <div class="indeterminate"></div>
+                </div>
                 <div class="card-content">
                     <span class="card-title">Login</span>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input id="email" type="email" class="validate" required>
-                            <label for="email" data-error="Email inválido">Email</label>
+                    <form [formGroup]="loginForm" no-validate (ngSubmit)="login()">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email" formControlName="email" type="email" class="validate" required autofocus>
+                                <label for="email" data-error="Invalid email">Email</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input id="password" formControlName="password" type="password" class="validate" required>
+                                <label for="password" data-error="Invalid password">Password</label>
+                            </div>
                         </div>
-                        <div class="input-field col s12">
-                            <input id="password" type="password" class="validate" required>                            
-                            <label for="password" data-error="Senha inválida">Senha</label>
+                        <div class="row">
+                            <button class="btn waves-effect waves-light" type="submit">
+                                Login
+                            </button>
+                            <button routerLink="/register" class="btn waves-effect waves-light">
+                                Register
+                            </button>
                         </div>
-                    </div>
-                    <button class="btn waves-effect waves-light" (click)="login()">
-                        Entrar
-                    </button>
-                    <button routerLink="/register" class="btn waves-effect waves-light">
-                        Registrar
-                    </button>
+                    </form>
                 </div>
             </div>
         </div>

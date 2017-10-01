@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModel, FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { User } from '../user';
+import { NgModel, FormGroup, FormBuilder } from '@angular/forms';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from '../user';
 import { toast } from 'angular2-materialize';
 
 @Component({
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   confirmPassword: string;
 
   constructor(
+    public afAuth: AngularFireAuth,
     public formBuilder: FormBuilder
   ) { }
 
@@ -30,16 +32,22 @@ export class RegisterComponent implements OnInit {
   }
 
   createUser() {
-    if (this.registerForm.invalid) return;
     this.showProgress = true;
-
-    var timeout = new Promise((resolve, reject) => {
-      setTimeout(() => {
+    if (this.registerForm.value.password !== this.user.Password) {
+      toast("Passwords dont match", 2000);
+      return;
+    }
+    this
+      .afAuth
+      .auth
+      .createUserWithEmailAndPassword(this.user.Email, this.user.Password)
+      .then((rs) => {
         this.showProgress = false;
-        resolve();
-      }, 1500);
-    });
-    
-    timeout.then(() => { toast('Cadastrado com sucesso', 2000) });
+        toast(rs.message, 2000);
+      })
+      .catch((error) => {
+        this.showProgress = false;
+        toast(error.message, 2000);
+      })
   }
 }

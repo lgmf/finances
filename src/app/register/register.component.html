@@ -11,23 +11,23 @@
                         <form [formGroup]="registerForm" no-validate (ngSubmit)="createUser()">
                             <div class="input-field col s12">
                                 <input id="email" formControlName="name" type="text" class="validate" required [(ngModel)]="user.Name">
-                                <label for="email" data-error="Nome inválido">*Nome</label>
+                                <label for="email" data-error="Invalid name">*Name</label>
                             </div>
                             <div class="input-field col s12">
                                 <input id="email" formControlName="email" type="email" class="validate" required [(ngModel)]="user.Email">
-                                <label for="email" data-error="Email inválido">*Email</label>
+                                <label for="email" data-error="Invalid email">*Email</label>
                             </div>
                             <div class="input-field col s12">
                                 <input id="password" formControlName="password" type="password" class="validate" required [(ngModel)]="user.Password">
-                                <label for="password" data-error="Senha inválida">*Senha</label>
+                                <label for="password" data-error="Invalid password">*Password</label>
                             </div>
                             <div class="input-field col s12">
                                 <input id="password" formControlName="confirmPassword" type="password" class="validate" required [(ngModel)]="confirmPassword">
-                                <label for="password" data-error="Senha inválida">*Confirmar Senha</label>
+                                <label for="password" data-error="Invalid password">*Confirm Password</label>
                             </div>
-                            <div class="col s12">
+                            <div class="input-field col s12">
                                 <button class="btn waves-effect waves-light" type="submit">
-                                      Finalizar
+                                      Finish
                                 </button>
                             </div>
                         </form>
