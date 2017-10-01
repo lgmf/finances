@@ -10,19 +10,19 @@
                     <div class="row">
                         <form [formGroup]="registerForm" no-validate (ngSubmit)="createUser()">
                             <div class="input-field col s12">
-                                <input id="email" name="name" type="text" class="validate" required [(ngModel)]="user.Name">
+                                <input id="email" formControlName="name" type="text" class="validate" required [(ngModel)]="user.Name">
                                 <label for="email" data-error="Nome inválido">*Nome</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="email" name="email" type="email" class="validate" required [(ngModel)]="user.Email">
+                                <input id="email" formControlName="email" type="email" class="validate" required [(ngModel)]="user.Email">
                                 <label for="email" data-error="Email inválido">*Email</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="password" name="password" type="password" class="validate" required [(ngModel)]="user.Password">
+                                <input id="password" formControlName="password" type="password" class="validate" required [(ngModel)]="user.Password">
                                 <label for="password" data-error="Senha inválida">*Senha</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="password" name="confirmPassword" type="password" class="validate" required [(ngModel)]="confirmPassword">
+                                <input id="password" formControlName="confirmPassword" type="password" class="validate" required [(ngModel)]="confirmPassword">
                                 <label for="password" data-error="Senha inválida">*Confirmar Senha</label>
                             </div>
                             <div class="col s12">
