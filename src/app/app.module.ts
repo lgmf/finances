@@ -14,11 +14,17 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { NothingFoundComponent } from './nothing-found/nothing-found.component';
 import { RegisterComponent } from './register/register.component';
+import { ExpensesComponent } from './expenses/expenses.component';
+import { GainsComponent } from './gains/gains.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const appRoutes: Routes = [
   { path: 'home/:uid', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'expenses', component: ExpensesComponent },
+  { path: 'gains', component: GainsComponent },
+  { path: 'categories', component: CategoriesComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: NothingFoundComponent }
 ];
@@ -30,7 +36,10 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     NothingFoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    ExpensesComponent,
+    GainsComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

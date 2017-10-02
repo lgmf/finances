@@ -42,8 +42,21 @@ export class RegisterComponent implements OnInit {
       .auth
       .createUserWithEmailAndPassword(this.user.Email, this.user.Password)
       .then((rs) => {
-        this.showProgress = false;
-        toast(rs.message, 2000);
+        var message = rs.message;
+        this.
+          afAuth
+          .auth
+          .currentUser
+          .updateProfile({ displayName: this.user.Name, photoURL: null })
+          .then((rs) => {
+            this.showProgress = false;
+            toast(message, 2000);
+          })
+          .catch((error) => {
+            this.showProgress = false;
+            toast(error.message, 2000);
+          })
+
       })
       .catch((error) => {
         this.showProgress = false;

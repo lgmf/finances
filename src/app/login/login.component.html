@@ -19,14 +19,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button class="btn waves-effect waves-light" type="submit">
+                            <button class="btn waves-effect waves-light col s12 col m12 col l12" type="submit">
                                 Login
-                            </button>
-                            <button routerLink="/register" class="btn waves-effect waves-light">
-                                Register
                             </button>
                         </div>
                     </form>
+                    <div class="row">
+                        <a routerLink="/register" class="center">Aren't user yet? Sign up now!</a>                        
+                    </div>
+                    <div class="row">
+                        <a (click)="resetPassword()" class="center">Forgot your password</a>                        
+                    </div>
                 </div>
             </div>
         </div>

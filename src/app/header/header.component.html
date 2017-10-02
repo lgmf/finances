@@ -1,10 +1,17 @@
 <nav>
-    <div class="nav-wrapper">
-        <a routerLink="/" class="brand-logo">Finances</a>
+    <div class="nav-wrapper red">
+        <a routerLink="/" class="brand-logo left hide-on-small-only">Home</a>
+        <a routerLink="/" class="brand-logo left hide-on-med-and-up"><i class="material-icons">home</i></a>
         <ul id="nav-mobile" class="right hide-on-small-only">
-            <li><a (click)="logout()">Sair</a></li>
+            <li><a routerLink="/gains">Gains</a></li>
+            <li><a routerLink="/expenses">Expenses</a></li>
+            <li><a routerLink="/categories">Categories</a></li>
+            <li><a (click)="logout()">Sign out</a></li>
         </ul>
         <ul id="nav-mobile" class="right hide-on-med-and-up">
+            <li><a routerLink="/gains"><i class="material-icons">attach_money</i></a></li>
+            <li><a routerLink="/expenses"><i class="material-icons">money_off</i></a></li>
+            <li><a routerLink="/categories"><i class="material-icons">folder</i></a></li>
             <li><a (click)="logout()"><i class="material-icons">exit_to_app</i></a></li>
         </ul>
     </div>

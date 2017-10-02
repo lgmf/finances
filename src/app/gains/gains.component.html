@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="progress" *ngIf="showProgress">
+    <div class="indeterminate"></div>
+</div>
+<div class="container">
+    <ul class="collection with-header" *ngIf="numbers?.length">
+        <li class="collection-header">
+            <h6>Gains</h6>
+        </li>
+        <li class="collection-item" *ngFor="let n of numbers">{{ n.$value }}</li>
+    </ul>
+</div>

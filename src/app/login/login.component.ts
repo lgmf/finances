@@ -4,11 +4,13 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase/app';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { User } from '../user';
 import { toast } from 'angular2-materialize';
+
+import * as firebase from 'firebase/app';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -73,5 +75,19 @@ export class LoginComponent implements OnInit {
         this.showProgress = false;
         toast(error.message, 2500)
       })
+  }
+
+  resetPassword(): void {
+    if (!confirm("Are you sure?")) return;
+
+    this
+      .afAuth
+      .auth
+      .sendPasswordResetEmail(this.loginForm.value.email)
+      .then(rs => {
+        console.log(rs);
+        toast(`To complete accees the link on ${this.loginForm.value.email}`, 2500)
+      })
+      .catch(error => toast(error.message, 2500))
   }
 }

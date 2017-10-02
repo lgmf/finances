@@ -2,13 +2,24 @@
 <div class="progress" *ngIf="showProgress">
     <div class="indeterminate"></div>
 </div>
-<div class="container">
+<div class="container" *ngIf="!showProgress">
     <div class="row">
-        <ul class="collection with-header" *ngIf="items?.length">
-            <li class="collection-header">
-                <h6>Numbers List</h6>
-            </li>
-            <li class="collection-item" *ngFor="let item of items">{{ item.$value }}</li>
-        </ul>
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ currentUser?.Name }} <span class="right">{{ today }}</span></span>                
+                <hr />
+                <h5>Gains <span class="badge">{{ gains }}</span></h5>
+                <h5>Expenses <span class="badge">{{ expenses }}</span></h5>
+                <hr />
+                <h5>Balance <span class="badge">{{ gains - expenses }}</span></h5>
+            </div>
+            <div class="card-action">
+                <div id="balance">
+                    <div id="balance-bar" [style.width.%]="getBalance()">
+                        <span>{{ getBalance() }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,13 @@
+#balance {
+    width: 100%;    
+    background-color: white;
+    border: 2px solid #AAAAAA;        
+}
+#balance-bar {
+    width: 0%;    
+    height: 35px;
+    background-color: #F44336;
+    font-size: 20px;
+    color: white;
+    text-align: right;
+}
