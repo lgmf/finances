@@ -16,15 +16,16 @@ import { User } from '../user';
 export class HomeComponent implements OnInit, OnDestroy {
 
   authSubscription: Subscription;
+  gainsSubscription: Subscription;
 
   today: string = new Date().toLocaleDateString();
   currentUser: User = new User();
 
   showProgress: boolean = true;
   items: number[];
-  gains: number = 1500;
-  expenses: number = 800;
-  
+  gains: number = 0;
+  expenses: number = 0;
+
   private balance: number;
 
   constructor(
@@ -40,11 +41,12 @@ export class HomeComponent implements OnInit, OnDestroy {
         return;
       }
       this.currentUser.Name = user.displayName;
-      this.showProgress = false;
-      // this.getlist = this.db.list(`${user.uid}`).subscribe(rs => {
-      //   this.items = rs
-      //   this.showProgress = false;
-      // });
+      this.gainsSubscription = this.db.list(`${user.uid}/gains`).subscribe(gains => {
+        gains.forEach(g => {
+          this.gains += g.Value;
+        })
+        this.showProgress = false;
+      });
     });
   }
 
@@ -54,6 +56,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.authSubscription) this.authSubscription.unsubscribe();
-    // if (this.getlist) this.getlist.unsubscribe();
+    if (this.gainsSubscription) this.gainsSubscription.unsubscribe();
   }
 }

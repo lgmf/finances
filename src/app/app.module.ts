@@ -17,13 +17,16 @@ import { RegisterComponent } from './register/register.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { GainsComponent } from './gains/gains.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { NewGainsComponent } from './new-gains/new-gains.component';
 
 const appRoutes: Routes = [
-  { path: 'home/:uid', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'expenses', component: ExpensesComponent },
   { path: 'gains', component: GainsComponent },
+  { path: 'gains/edit/:key', component: NewGainsComponent },
+  { path: 'gains/new', component: NewGainsComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: '', component: LoginComponent },
   { path: '**', component: NothingFoundComponent }
@@ -39,7 +42,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     ExpensesComponent,
     GainsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    NewGainsComponent
   ],
   imports: [
     BrowserModule,

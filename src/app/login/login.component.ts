@@ -10,7 +10,6 @@ import { User } from '../user';
 import { toast } from 'angular2-materialize';
 
 import * as firebase from 'firebase/app';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-login',
@@ -33,13 +32,6 @@ export class LoginComponent implements OnInit {
       email: [(localStorage.email) ? localStorage.email : null],
       password: [null]
     })
-
-    this.user = this.afAuth.authState;
-
-    this.afAuth.authState.subscribe(user => {
-      if (!user) return;
-      this.router.navigateByUrl(`/home/${user.uid}`);
-    })
   }
 
   login(): void {
@@ -53,7 +45,7 @@ export class LoginComponent implements OnInit {
       .then(rs => {
         this.showProgress = false;
         localStorage.email = this.loginForm.value.email;
-        this.router.navigateByUrl(`/home/${rs.uid}`);
+        this.router.navigateByUrl(`/home`);
       })
       .catch(error => {
         this.showProgress = false;
