@@ -15,11 +15,10 @@ import { User } from '../user';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  authSubscription: Subscription;
   gainsSubscription: Subscription;
 
   today: string = new Date().toLocaleDateString();
-  currentUser: User = new User();
+  currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
 
   showProgress: boolean = true;
   items: number[];
@@ -35,18 +34,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.authSubscription = this.afAuth.authState.subscribe(user => {
-      if (!user) {
-        this.router.navigateByUrl('login')
-        return;
-      }
-      this.currentUser.Name = user.displayName;
-      this.gainsSubscription = this.db.list(`${user.uid}/gains`).subscribe(gains => {
-        gains.forEach(g => {
-          this.gains += g.Value;
-        })
-        this.showProgress = false;
-      });
+    if (this.currentUser.uid === "") {
+      this.router.navigateByUrl('login')
+      return;
+    }
+
+    this.gainsSubscription = this.db.list(`${this.currentUser.uid}/gains`).subscribe(gains => {
+      gains.forEach(g => {
+        this.gains += g.Value;
+      })
+      this.showProgress = false;
     });
   }
 
@@ -54,8 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return Math.round((this.expenses / this.gains) * 100);
   }
 
-  ngOnDestroy(): void {
-    if (this.authSubscription) this.authSubscription.unsubscribe();
+  ngOnDestroy(): void {    
     if (this.gainsSubscription) this.gainsSubscription.unsubscribe();
   }
 }

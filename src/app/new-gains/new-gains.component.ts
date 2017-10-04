@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { toast } from 'angular2-materialize';
 import { Gain } from '../gain';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from '../user';
 
 @Component({
   selector: 'app-new-gains',
@@ -13,15 +14,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./new-gains.component.css']
 })
 export class NewGainsComponent implements OnInit, OnDestroy {
-
-  newGainForm: FormGroup;
-  gain: Gain = new Gain("", "New Gain", 0);
-
-  authSubscription: Subscription;
+  
   paramsSubscription: Subscription;
   gainSubscription: Subscription;
-
-  currentUserUID: string = "";
+  newGainForm: FormGroup;
+  gain: Gain = new Gain("", "New Gain", 0);
+  currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
+ 
   showProgress: boolean = false;
 
   constructor(
@@ -39,14 +38,11 @@ export class NewGainsComponent implements OnInit, OnDestroy {
     })
     this.paramsSubscription = this.route.params.subscribe(params => {
       this.gain.$key = params['key'];
-      this.authSubscription = this.afAuth.authState.subscribe(user => {
-        this.currentUserUID = user.uid;
-        if (this.gain.$key) {
-          this.gainSubscription = this.db.object(`${this.currentUserUID}/gains/${this.gain.$key}`).subscribe(gain => {
-            this.gain = gain;
-          });
-        }
-      });
+      if (!this.gain.$key) return;
+      
+      this.gainSubscription = this.db.object(`${this.currentUser.uid}/gains/${this.gain.$key}`).subscribe(gain => {
+        this.gain = gain;
+      });      
     });
   }
 
@@ -62,7 +58,7 @@ export class NewGainsComponent implements OnInit, OnDestroy {
     this.showProgress = true;
     this
       .db
-      .list(`${this.currentUserUID}/gains`)
+      .list(`${this.currentUser.uid}/gains`)
       .push(this.gain)
       .then(rs => {
         this.showProgress = false;
@@ -81,7 +77,7 @@ export class NewGainsComponent implements OnInit, OnDestroy {
     this.showProgress = true;
     this
       .db
-      .object(`${this.currentUserUID}/gains/${this.gain.$key}`)
+      .object(`${this.currentUser.uid}/gains/${this.gain.$key}`)
       .update({
         Name: this.gain.Name,
         Value: this.gain.Value
@@ -98,7 +94,6 @@ export class NewGainsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.authSubscription) this.authSubscription.unsubscribe();
     if (this.paramsSubscription) this.paramsSubscription.unsubscribe();
     if (this.gainSubscription) this.gainSubscription.unsubscribe();
   }

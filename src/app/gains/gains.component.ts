@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
-import * as $ from 'jquery';
 import { toast } from 'angular2-materialize';
-import { Router } from '@angular/router';
+import { User } from '../user';
 
 @Component({
   selector: 'app-gains',
@@ -14,25 +14,26 @@ import { Router } from '@angular/router';
 })
 export class GainsComponent implements OnInit, OnDestroy {
 
-  authSubscription: Subscription;
   getlistSubscription: Subscription;
 
+  currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
+
   gains: number[] = [];
-  currentUserUID: string = "";
   showProgress: boolean = true;
 
   constructor(
     public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,
+    public router: Router
   ) { }
 
   ngOnInit() {
-    this.authSubscription = this.afAuth.authState.subscribe(user => {
-      this.currentUserUID = user.uid;
-      this.getlistSubscription = this.db.list(`${this.currentUserUID}/gains`).subscribe(rs => {
-        this.gains = rs
-        this.showProgress = false;
-      });
+    if (this.currentUser.uid === "") {
+      this.router.navigateByUrl('login')
+      return;
+    }
+    this.getlistSubscription = this.db.list(`${this.currentUser.uid}/gains`).subscribe(rs => {
+      this.gains = rs
+      this.showProgress = false;
     });
   }
 
@@ -42,7 +43,7 @@ export class GainsComponent implements OnInit, OnDestroy {
 
     this
       .db
-      .object(`${this.currentUserUID}/gains/${gain.$key}`)
+      .object(`${this.currentUser.uid}/gains/${gain.$key}`)
       .remove()
       .then(rs => {
         this.showProgress = false;
@@ -54,8 +55,7 @@ export class GainsComponent implements OnInit, OnDestroy {
       })
   }
 
-  ngOnDestroy(): void {
-    if (this.authSubscription) this.authSubscription.unsubscribe();
+  ngOnDestroy(): void {   
     if (this.getlistSubscription) this.getlistSubscription.unsubscribe();
   }
 
