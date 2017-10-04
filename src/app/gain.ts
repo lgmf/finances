@@ -1,6 +1,6 @@
 export class Gain {
     constructor(
-        public $key : string = "",
+        public Identifier : string = "",
         public Name: string = "",
         public Value: number = 0        
     ) { }

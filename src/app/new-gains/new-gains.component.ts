@@ -14,14 +14,15 @@ import { User } from '../user';
   styleUrls: ['./new-gains.component.css']
 })
 export class NewGainsComponent implements OnInit, OnDestroy {
-  
+
   paramsSubscription: Subscription;
   gainSubscription: Subscription;
   newGainForm: FormGroup;
   gain: Gain = new Gain("", "New Gain", 0);
   currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
- 
+
   showProgress: boolean = false;
+  isUpdate: boolean = false;
 
   constructor(
     public db: AngularFireDatabase,
@@ -37,12 +38,16 @@ export class NewGainsComponent implements OnInit, OnDestroy {
       value: [null]
     })
     this.paramsSubscription = this.route.params.subscribe(params => {
-      this.gain.$key = params['key'];
-      if (!this.gain.$key) return;
-      
-      this.gainSubscription = this.db.object(`${this.currentUser.uid}/gains/${this.gain.$key}`).subscribe(gain => {
-        this.gain = gain;
-      });      
+      if (params['key']) {
+        this.gainSubscription = this.db.object(`${this.currentUser.uid}/gains/${params['key']}`).subscribe(gain => {
+          this.gain = {
+            Identifier: params['key'],
+            Name: gain.Name,
+            Value: gain.Value
+          }
+          
+        });
+      }
     });
   }
 
@@ -50,7 +55,7 @@ export class NewGainsComponent implements OnInit, OnDestroy {
 
     if (this.newGainForm.invalid) return;
 
-    if (this.gain) {
+    if (this.gain.Identifier !== "") {
       this.updateGain();
       return;
     }
@@ -77,8 +82,9 @@ export class NewGainsComponent implements OnInit, OnDestroy {
     this.showProgress = true;
     this
       .db
-      .object(`${this.currentUser.uid}/gains/${this.gain.$key}`)
+      .object(`${this.currentUser.uid}/gains/${this.gain.Identifier}`)
       .update({
+        Identifier: this.gain.Identifier,
         Name: this.gain.Name,
         Value: this.gain.Value
       })
