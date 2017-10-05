@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Subscription } from 'rxjs/Subscription';
 import { toast } from 'angular2-materialize';
 import { Gain } from '../gain';
@@ -22,11 +21,9 @@ export class NewGainsComponent implements OnInit, OnDestroy {
   currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
 
   showProgress: boolean = false;
-  isUpdate: boolean = false;
 
   constructor(
-    public db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,
+    public db: AngularFireDatabase,  
     public formBuilder: FormBuilder,
     public router: Router,
     public route: ActivatedRoute
@@ -44,8 +41,7 @@ export class NewGainsComponent implements OnInit, OnDestroy {
             Identifier: params['key'],
             Name: gain.Name,
             Value: gain.Value
-          }
-          
+          }          
         });
       }
     });

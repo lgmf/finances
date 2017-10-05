@@ -3,7 +3,43 @@
     <div class="indeterminate"></div>
 </div>
 <div class="container">
-    <p>
-        expense works!
-    </p>
+    <div class="table-header">
+        <h5>Expenses
+            <a routerLink="/expenses/new" class="right" title="New Expense"><i class="material-icons">add</i></a>
+        </h5>
+    </div>
+    <table class="bordered responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Date</th>
+                <th class="hide-on-small-only">Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let expense of expenses">
+                <td class="hide-on-small-only">{{ expense.Name }}</td>
+                <td class="hide-on-med-and-up">
+                    {{ expense.Name }} <br />
+                    <span class="sub-title">( {{ expense.Category }} )</span>
+                </td>
+                <td>{{ expense.Value }}</td>
+                <td>{{ expense.Date | date:'dd/MM/yyyy' }}</td>
+                <td class="hide-on-small-only">{{ expense.Category }}</td>
+                <td>
+                    <a routerLink="/expenses/edit/{{ expense.$key }}"><i class="material-icons">mode_edit</i></a>
+                    <a href="#"><i class="material-icons" (click)="removeExpense($event,expense)">delete</i></a>
+                </td>
+            </tr>
+            <tr *ngIf="!expenses?.length">
+                <td></td>
+                <td></td>
+                <td>Nothing to list</td>
+                <td class="hide-on-small-only"></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

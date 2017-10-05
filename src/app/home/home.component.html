@@ -8,8 +8,8 @@
             <div class="card-content">
                 <span class="card-title">{{ currentUser?.Name }} <span class="right">{{ today }}</span></span>                
                 <hr />
-                <h5>Gains <span class="badge">{{ gains }}</span></h5>
-                <h5>Expenses <span class="badge">{{ expenses }}</span></h5>
+                <h5 routerLink="/gains">Gains <span class="badge">{{ gains }}</span></h5>
+                <h5 routerLink="/expenses">Expenses <span class="badge">{{ expenses }}</span></h5>
                 <hr />
                 <h5>Balance <span class="badge">{{ gains - expenses }}</span></h5>
             </div>

@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
+import { MdSelectModule, MdNativeDateModule, MdDatepickerModule  } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -18,12 +20,15 @@ import { ExpensesComponent } from './expenses/expenses.component';
 import { GainsComponent } from './gains/gains.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NewGainsComponent } from './new-gains/new-gains.component';
+import { NewExpensesComponent } from './new-expenses/new-expenses.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'expenses', component: ExpensesComponent },
+  { path: 'expenses/edit/:key', component: NewExpensesComponent },
+  { path: 'expenses/new', component: NewExpensesComponent },
   { path: 'gains', component: GainsComponent },
   { path: 'gains/edit/:key', component: NewGainsComponent },
   { path: 'gains/new', component: NewGainsComponent },
@@ -43,7 +48,8 @@ const appRoutes: Routes = [
     ExpensesComponent,
     GainsComponent,
     CategoriesComponent,
-    NewGainsComponent
+    NewGainsComponent,
+    NewExpensesComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,11 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     MaterializeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MdSelectModule,
+    MdNativeDateModule,
+    MdDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

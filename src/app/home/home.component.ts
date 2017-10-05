@@ -16,6 +16,7 @@ import { User } from '../user';
 export class HomeComponent implements OnInit, OnDestroy {
 
   gainsSubscription: Subscription;
+  expensesSubscription: Subscription;
 
   today: string = new Date().toLocaleDateString();
   currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
@@ -45,6 +46,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
       this.showProgress = false;
     });
+
+    this.showProgress = true;
+    
+    this.expensesSubscription = this.db.list(`${this.currentUser.uid}/expenses`).subscribe(expenses => {
+      expenses.forEach(e => {
+        this.expenses += e.Value;
+      })
+      this.showProgress = false;
+    });
   }
 
   getBalance(): number {
@@ -53,5 +63,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {    
     if (this.gainsSubscription) this.gainsSubscription.unsubscribe();
+    if (this.expensesSubscription) this.expensesSubscription.unsubscribe();
   }
 }

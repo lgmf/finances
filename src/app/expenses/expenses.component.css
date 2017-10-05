@@ -1,0 +1,9 @@
+table{
+    background-color: white;
+}
+
+.table-header{
+    background-color: white;
+    height: 46px;
+    padding: 5px 5px;
+}

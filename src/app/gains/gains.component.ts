@@ -6,6 +6,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 
 import { toast } from 'angular2-materialize';
 import { User } from '../user';
+import { Gain } from '../gain';
 
 @Component({
   selector: 'app-gains',
@@ -18,7 +19,7 @@ export class GainsComponent implements OnInit, OnDestroy {
 
   currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
 
-  gains: number[] = [];
+  gains: Gain[] = [];
   showProgress: boolean = true;
 
   constructor(

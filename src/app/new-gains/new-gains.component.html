@@ -15,7 +15,7 @@
                                 <label for="name" data-error="Invalid name">Name</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="value" formControlName="value" [(ngModel)]="gain.Value" type="number" class="validate" required>
+                                <input id="value" formControlName="value" [(ngModel)]="gain.Value" type="number" step="0.01" class="validate" required>
                                 <label for="value" data-error="Invalid value">Value</label>
                             </div>
                         </div>
