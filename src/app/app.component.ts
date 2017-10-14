@@ -5,30 +5,33 @@ import { Subscription } from 'rxjs/Subscription';
 import { User } from './user';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  authSubscription: Subscription;
+	authSubscription: Subscription;
 
-  constructor(
-    public afAuth: AngularFireAuth,
-    public router: Router
-  ) { }
+	constructor(
+		public afAuth: AngularFireAuth,
+		public router: Router
+	) { }
 
-  ngOnInit(): void {
-    this.authSubscription = this.afAuth.authState.subscribe(user => {
-      if (!user) return;
-      let currentUser = new User(user.uid, user.displayName, user.email);
-      localStorage.currentUser = JSON.stringify(currentUser);
-      this.router.navigateByUrl(`/home`);
-    })
-  }
+	ngOnInit(): void {
+		this.authSubscription = this.afAuth.authState.subscribe(user => {
+			if (!user)
+				return;
+			let currentUser = new User(user.uid, user.displayName, user.email);
+			localStorage.currentUser = JSON.stringify(currentUser);
+			if (this.router.navigated)
+				return;
+			this.router.navigateByUrl(`/home`);
+		})
+	}
 
-  ngOnDestroy(): void {
-    this.authSubscription.unsubscribe();
-  }
+	ngOnDestroy(): void {
+		this.authSubscription.unsubscribe();
+	}
 
 }
