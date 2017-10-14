@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
-import { MdSelectModule, MdNativeDateModule, MdDatepickerModule  } from '@angular/material';
+import { MatSelectModule, MatNativeDateModule, MatDatepickerModule  } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -61,9 +61,9 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MdSelectModule,
-    MdNativeDateModule,
-    MdDatepickerModule
+    MatSelectModule,
+    MatNativeDateModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
