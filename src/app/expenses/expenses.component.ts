@@ -8,56 +8,56 @@ import { Expense } from '../expense';
 import { toast } from 'angular2-materialize';
 
 @Component({
-  selector: 'app-expenses',
-  templateUrl: './expenses.component.html',
-  styleUrls: ['./expenses.component.css']
+	selector: 'app-expenses',
+	templateUrl: './expenses.component.html',
+	styleUrls: ['./expenses.component.css']
 })
 export class ExpensesComponent implements OnInit, OnDestroy {
 
-  getlistSubscription: Subscription;
+	getlistSubscription: Subscription;
 
-  currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
+	currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
 
-  expenses: Expense[] = [];
-  showProgress: boolean = true;
+	expenses: Expense[] = [];
+	showProgress: boolean = true;
 
-  constructor(
-    public db: AngularFireDatabase,
-    public router: Router
-  ) { }
+	constructor(
+		public db: AngularFireDatabase,
+		public router: Router
+	) { }
 
-  ngOnInit() {
-    if (this.currentUser.uid === "") {
-      this.router.navigateByUrl('login')
-      return;
-    }
+	ngOnInit() {
+		if (this.currentUser.uid === "") {
+			this.router.navigateByUrl('login')
+			return;
+		}
 
-    this.getlistSubscription = this.db.list(`${this.currentUser.uid}/expenses`).subscribe(rs => {
-      this.expenses = rs
-      this.showProgress = false;
-    });
-  }
+		this.getlistSubscription = this.db.list<Expense>(`${this.currentUser.uid}/expenses`).valueChanges().subscribe((rs: Expense[]) => {
+			this.expenses = rs;
+			this.showProgress = false;
+		});
+	}
 
-  removeExpense(evt, expense): void {
-    evt.preventDefault();
-    if (!confirm(`Are you sure you want to delete "${expense.Name}" ?`)) return;
+	removeExpense(evt, expense): void {
+		evt.preventDefault();
+		if (!confirm(`Are you sure you want to delete "${expense.Name}" ?`)) return;
 
-    this
-      .db
-      .object(`${this.currentUser.uid}/expenses/${expense.$key}`)
-      .remove()
-      .then(rs => {
-        this.showProgress = false;
-        toast(rs, 2500)
-      })
-      .catch(error => {
-        this.showProgress = false;
-        toast(error.message, 2500)
-      })
-  }
+		this
+			.db
+			.object(`${this.currentUser.uid}/expenses/${expense.$key}`)
+			.remove()
+			.then(rs => {
+				this.showProgress = false;
+				toast(rs, 2500)
+			})
+			.catch(error => {
+				this.showProgress = false;
+				toast(error.message, 2500)
+			})
+	}
 
-  ngOnDestroy() {
-    if (this.getlistSubscription) this.getlistSubscription.unsubscribe();
-  }
+	ngOnDestroy() {
+		if (this.getlistSubscription) this.getlistSubscription.unsubscribe();
+	}
 
 }

@@ -19,18 +19,18 @@
                                 <label for="value" data-error="Invalid value">Value</label>
                             </div>
                             <div class="input-field col s12">
-                                <md-form-field>
-                                    <input mdInput [mdDatepicker]="picker" placeholder="Choose a date" formControlName="date" [(ngModel)]="expense.Date"  [style.width]="'80%'">
-                                    <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-                                    <md-datepicker #picker></md-datepicker>
-                                </md-form-field>
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date" [(ngModel)]="expense.Date"  [style.width]="'80%'">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
                             </div>
                             <div class="input-field col s12">
-                                <md-select placeholder="Category" [style.width]="'100%'" formControlName="category" [(ngModel)]="expense.Category">
-                                    <md-option *ngFor="let category of categories" [value]="category.Value">
+                                <mat-select placeholder="Category" [style.width]="'100%'" formControlName="category" [(ngModel)]="expense.Category">
+                                    <mat-option *ngFor="let category of categories" [value]="category.Value">
                                         {{ category.Name }}
-                                    </md-option>
-                                </md-select>
+                                    </mat-option>
+                                </mat-select>
                             </div>
                         </div>
                         <div class="row">
