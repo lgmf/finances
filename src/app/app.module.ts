@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './shared/login/login.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './shared/layout/header/header.component';
 import { NothingFoundComponent } from './shared/nothing-found/nothing-found.component';
 import { RegisterComponent } from './shared/register/register.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
