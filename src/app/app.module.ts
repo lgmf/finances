@@ -17,7 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { NothingFoundComponent } from './nothing-found/nothing-found.component';
 import { RegisterComponent } from './register/register.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { CategoryListComponent } from './categories/category-list/category-list.component';
 import { GainListComponent } from './gains/gain-list/gain-list.component';
 import { GainComponent } from './gains/gain/gain.component';
 import { ExpenseComponent } from './expenses/expense/expense.component';
@@ -33,7 +33,7 @@ import { ROUTES } from './app.routing';
     RegisterComponent,
     ExpenseListComponent,
     GainListComponent,
-    CategoriesComponent,
+    CategoryListComponent,
     GainComponent,
     ExpenseComponent
   ],
