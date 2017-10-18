@@ -5,16 +5,15 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { toast } from 'angular2-materialize';
-import { Gain } from './gain.model';
-import { User } from '../login/user.model';
-
+import { Gain } from '../shared/gain.model';
+import { User } from '../../login/user.model';
 
 @Component({
-	selector: 'app-gains',
-	templateUrl: './gains.component.html',
-	styleUrls: ['./gains.component.css']
+	selector: 'app-gain-list',
+	templateUrl: './gain-list.component.html',
+	styleUrls: ['./gain-list.component.css']
 })
-export class GainsComponent implements OnInit, OnDestroy {
+export class GainListComponent implements OnInit, OnDestroy {
 
 	getlistSubscription: Subscription;
 
