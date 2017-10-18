@@ -8,7 +8,7 @@ import { ExpenseComponent } from './expenses/expense/expense.component';
 import { GainListComponent } from './gains/gain-list/gain-list.component';
 import { GainComponent } from './gains/gain/gain.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
-import { NothingFoundComponent } from './nothing-found/nothing-found.component';
+import { NothingFoundComponent } from './shared/nothing-found/nothing-found.component';
 
 export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
