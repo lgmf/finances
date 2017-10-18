@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
 
-import { User } from '../user';
-import { Expense } from '../expense';
+
 import { toast } from 'angular2-materialize';
+import { Expense } from './expense.model';
+import { User } from '../login/user.model';
 
 @Component({
 	selector: 'app-expenses',
@@ -32,8 +33,8 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		this.getlistSubscription = this.db.list<Expense>(`${this.currentUser.uid}/expenses`).valueChanges().subscribe((rs: Expense[]) => {
-			this.expenses = rs;
+		this.getlistSubscription = this.db.list<Expense[]>(`${this.currentUser.uid}/expenses`).valueChanges().subscribe((rs: Expense[]) => {		
+			this.expenses = rs;	
 			this.showProgress = false;
 		});
 	}
@@ -44,7 +45,7 @@ export class ExpensesComponent implements OnInit, OnDestroy {
 
 		this
 			.db
-			.object(`${this.currentUser.uid}/expenses/${expense.$key}`)
+			.object(`${this.currentUser.uid}/expenses/${expense.Identifier}`)
 			.remove()
 			.then(rs => {
 				this.showProgress = false;

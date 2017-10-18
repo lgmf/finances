@@ -2,10 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
-import { toast } from 'angular2-materialize';
-import { Gain } from '../gain';
 import { Router, ActivatedRoute } from '@angular/router';
-import { User } from '../user';
+
+import { toast } from 'angular2-materialize';
+import { Gain } from '../gain.model';
+import { User } from '../../login/user.model';
 
 @Component({
 	selector: 'app-new-gains',
@@ -62,9 +63,17 @@ export class NewGainsComponent implements OnInit, OnDestroy {
 			.list<Gain>(`${this.currentUser.uid}/gains`)
 			.push(this.gain)
 			.then(rs => {
-				this.showProgress = false;
-				toast(rs.message, 2500)
-				this.router.navigateByUrl(`/gains`);
+				this
+					.db
+					.object(`${this.currentUser.uid}/gains/${rs.key}`)
+					.update({ Identifier: rs.key })
+					.then(rs => {
+						this.showProgress = false;
+						this.router.navigateByUrl(`/gains`);
+					}, error => {
+						this.showProgress = false;
+						toast(error.message, 2500)
+					})
 			}, error => {
 				this.showProgress = false;
 				toast(error.message, 2500)

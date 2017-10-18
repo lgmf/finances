@@ -5,9 +5,10 @@ import { DateAdapter, NativeDateAdapter } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Expense } from '../expense';
-import { User } from '../user';
+
 import { toast } from 'angular2-materialize';
+import { Expense } from '../expense.model';
+import { User } from '../../login/user.model';
 
 @Component({
 	selector: 'app-new-expenses',
@@ -82,9 +83,17 @@ export class NewExpensesComponent implements OnInit, OnDestroy {
 				Category: this.expense.Category
 			})
 			.then(rs => {
-				this.showProgress = false;
-				toast(rs.message, 2500)
-				this.router.navigateByUrl(`/expenses`);
+				this
+					.db
+					.object(`${this.currentUser.uid}/expenses/${rs.key}`)
+					.update({ Identifier: rs.key })
+					.then(rs => {
+						this.showProgress = false;						
+						this.router.navigateByUrl(`/expenses`);
+					})
+					.catch(error => {
+						this.showProgress = false;						
+					})
 			}, error => {
 				this.showProgress = false;
 				toast(error.message, 2500)

@@ -5,8 +5,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { toast } from 'angular2-materialize';
-import { User } from '../user';
-import { Gain } from '../gain';
+import { Gain } from './gain.model';
+import { User } from '../login/user.model';
+
 
 @Component({
 	selector: 'app-gains',
@@ -44,7 +45,7 @@ export class GainsComponent implements OnInit, OnDestroy {
 
 		this
 			.db
-			.object(`${this.currentUser.uid}/gains/${gain.$key}`)
+			.object(`${this.currentUser.uid}/gains/${gain.Identifier}`)
 			.remove()
 			.then(rs => {
 				this.showProgress = false;

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { User } from './user';
+import { User } from './login/user.model';
 
 @Component({
 	selector: 'app-root',

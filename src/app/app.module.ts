@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
-import { MatSelectModule, MatNativeDateModule, MatDatepickerModule  } from '@angular/material';
+import { MatSelectModule, MatNativeDateModule, MatDatepickerModule, MatInputModule  } from '@angular/material';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -19,23 +19,9 @@ import { RegisterComponent } from './register/register.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { GainsComponent } from './gains/gains.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { NewGainsComponent } from './new-gains/new-gains.component';
-import { NewExpensesComponent } from './new-expenses/new-expenses.component';
-
-const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'expenses', component: ExpensesComponent },
-  { path: 'expenses/edit/:key', component: NewExpensesComponent },
-  { path: 'expenses/new', component: NewExpensesComponent },
-  { path: 'gains', component: GainsComponent },
-  { path: 'gains/edit/:key', component: NewGainsComponent },
-  { path: 'gains/new', component: NewGainsComponent },
-  { path: 'categories', component: CategoriesComponent },
-  { path: '', component: LoginComponent },
-  { path: '**', component: NothingFoundComponent }
-];
+import { NewGainsComponent } from './gains/new-gains/new-gains.component';
+import { NewExpensesComponent } from './expenses/new-expenses/new-expenses.component';
+import { ROUTES } from './app.routing';
 
 @NgModule({
   declarations: [
@@ -53,7 +39,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(ROUTES),
     AngularFireModule.initializeApp(environment.firebase, 'finances'),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
@@ -63,7 +49,8 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatSelectModule,
     MatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

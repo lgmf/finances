@@ -20,18 +20,18 @@
                             </div>
                             <div class="input-field col s12">
                                 <mat-form-field>
-                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date" [(ngModel)]="expense.Date"  [style.width]="'80%'">
+                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date" [(ngModel)]="expense.Date">
                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                     <mat-datepicker #picker></mat-datepicker>
                                 </mat-form-field>
                             </div>
-                            <div class="input-field col s12">
-                                <mat-select placeholder="Category" [style.width]="'100%'" formControlName="category" [(ngModel)]="expense.Category">
+                            <!-- <div class="input-field col s12"> -->
+                                <mat-select placeholder="Category" formControlName="category" [(ngModel)]="expense.Category">
                                     <mat-option *ngFor="let category of categories" [value]="category.Value">
                                         {{ category.Name }}
                                     </mat-option>
                                 </mat-select>
-                            </div>
+                            <!-- </div> -->
                         </div>
                         <div class="row">
                             <button class="btn-floating btn-large waves-effect waves-light red right" type="submit">

@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { User } from '../user';
+
 import { toast } from 'angular2-materialize';
 
 import * as firebase from 'firebase/app';

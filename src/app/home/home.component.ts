@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
+
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from '../user';
-import { Gain } from '../gain';
-import { Expense } from '../expense';
+
+import { User } from '../login/user.model';
+import { Gain } from '../gains/gain.model';
+import { Expense } from '../expenses/expense.model';
+
 
 @Component({
 	selector: 'app-home',
@@ -42,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		this.gainsSubscription = this.db.list<Gain>(`${this.currentUser.uid}/gains`).valueChanges().subscribe((gains: Gain[]) => {
+		this.gainsSubscription = this.db.list<Gain[]>(`${this.currentUser.uid}/gains`).valueChanges().subscribe((gains: Gain[]) => {
 			gains.forEach(g => {
 				this.gains += g.Value;
 			})
@@ -51,7 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 		this.showProgress = true;
 
-		this.expensesSubscription = this.db.list<Expense>(`${this.currentUser.uid}/expenses`).valueChanges().subscribe((expenses: Expense[]) => {
+		this.expensesSubscription = this.db.list<Expense[]>(`${this.currentUser.uid}/expenses`).valueChanges().subscribe((expenses: Expense[]) => {
 			expenses.forEach(e => {
 				this.expenses += e.Value;
 			})

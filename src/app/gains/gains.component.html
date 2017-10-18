@@ -12,7 +12,7 @@
         <li class="collection-item" *ngFor="let gain of gains">
             <span class="title">{{ gain.Name }}: {{ gain.Value }}</span>
             <a href="#" class="secondary-content"><i class="material-icons" (click)="removeGain($event,gain)">delete</i></a>
-            <a routerLink="/gains/edit/{{ gain.$key }}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+            <a routerLink="/gains/edit/{{ gain.Identifier }}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
         </li>
         <li class="collection-item" *ngIf="!gains?.length">
             <span class="center">Nothing to list</span>
