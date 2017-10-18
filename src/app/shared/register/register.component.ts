@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModel, FormGroup, FormBuilder } from '@angular/forms';
-
-import { User } from '../login/user.model';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { toast } from 'angular2-materialize';
+
+import { User } from 'app/core/model/user.model';
 
 @Component({
   selector: 'app-register',
