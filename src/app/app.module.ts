@@ -15,7 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { NothingFoundComponent } from './nothing-found/nothing-found.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './shared/register/register.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { CategoryListComponent } from './categories/category-list/category-list.component';
 import { GainListComponent } from './gains/gain-list/gain-list.component';
