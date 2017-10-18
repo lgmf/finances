@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { toast } from 'angular2-materialize';
 import { Gain } from '../shared/gain.model';
-import { User } from '../../login/user.model';
+import { User } from '../../shared/login/user.model';
 
 @Component({
 	selector: 'app-gain',
