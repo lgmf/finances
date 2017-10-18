@@ -3,17 +3,16 @@ import { Router } from '@angular/router';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
 
-
 import { toast } from 'angular2-materialize';
-import { Expense } from './expense.model';
-import { User } from '../login/user.model';
+import { Expense } from '../shared/expense.model';
+import { User } from '../../login/user.model';
 
 @Component({
-	selector: 'app-expenses',
-	templateUrl: './expenses.component.html',
-	styleUrls: ['./expenses.component.css']
+	selector: 'app-expense-list',
+	templateUrl: './expense-list.component.html',
+	styleUrls: ['./expense-list.component.css']
 })
-export class ExpensesComponent implements OnInit, OnDestroy {
+export class ExpenseListComponent implements OnInit, OnDestroy {
 
 	getlistSubscription: Subscription;
 

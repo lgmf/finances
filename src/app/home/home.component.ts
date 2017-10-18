@@ -9,8 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 
 import { User } from '../login/user.model';
 import { Gain } from '../gains/gain.model';
-import { Expense } from '../expenses/expense.model';
-
+import { Expense } from '../expenses/shared/expense.model';
 
 @Component({
 	selector: 'app-home',
