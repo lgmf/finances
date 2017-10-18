@@ -7,7 +7,7 @@ import { ExpenseListComponent } from './expenses/expense-list/expense-list.compo
 import { ExpenseComponent } from './expenses/expense/expense.component';
 import { GainListComponent } from './gains/gain-list/gain-list.component';
 import { GainComponent } from './gains/gain/gain.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { CategoryListComponent } from './categories/category-list/category-list.component';
 import { NothingFoundComponent } from './nothing-found/nothing-found.component';
 
 export const ROUTES: Routes = [
@@ -20,7 +20,7 @@ export const ROUTES: Routes = [
     { path: 'gains', component: GainListComponent },
     { path: 'gains/edit/:key', component: GainComponent },
     { path: 'gains/new', component: GainComponent },
-    { path: 'categories', component: CategoriesComponent },
+    { path: 'categories', component: CategoryListComponent },
     { path: '', component: LoginComponent },
     { path: '**', component: NothingFoundComponent }
 ];
