@@ -16,11 +16,11 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { NothingFoundComponent } from './nothing-found/nothing-found.component';
 import { RegisterComponent } from './register/register.component';
-import { ExpensesComponent } from './expenses/expenses.component';
+import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { GainsComponent } from './gains/gains.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { NewGainsComponent } from './gains/new-gains/new-gains.component';
-import { NewExpensesComponent } from './expenses/new-expenses/new-expenses.component';
+import { ExpenseComponent } from './expenses/expense/expense.component';
 import { ROUTES } from './app.routing';
 
 @NgModule({
@@ -31,11 +31,11 @@ import { ROUTES } from './app.routing';
     HeaderComponent,
     NothingFoundComponent,
     RegisterComponent,
-    ExpensesComponent,
+    ExpenseListComponent,
     GainsComponent,
     CategoriesComponent,
     NewGainsComponent,
-    NewExpensesComponent
+    ExpenseComponent
   ],
   imports: [
     BrowserModule,

@@ -5,21 +5,20 @@ import { DateAdapter, NativeDateAdapter } from '@angular/material';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Subscription } from 'rxjs/Subscription';
 
-
 import { toast } from 'angular2-materialize';
-import { Expense } from '../expense.model';
+import { Expense } from '../shared/expense.model';
 import { User } from '../../login/user.model';
 
 @Component({
-	selector: 'app-new-expenses',
-	templateUrl: './new-expenses.component.html',
-	styleUrls: ['./new-expenses.component.css']
+	selector: 'app-expense',
+	templateUrl: './expense.component.html',
+	styleUrls: ['./expense.component.css']
 })
-export class NewExpensesComponent implements OnInit, OnDestroy {
+export class ExpenseComponent implements OnInit, OnDestroy {
 
 	paramsSubscription: Subscription;
 	expenseSubscription: Subscription;
-	newExpenseForm: FormGroup;
+	expenseForm: FormGroup;
 	expense: Expense = new Expense("", "New Expense", 0, new Date(), "");
 	currentUser: User = (localStorage.currentUser) ? JSON.parse(localStorage.currentUser) : new User();
 
@@ -42,7 +41,7 @@ export class NewExpensesComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		this.dateAdapter.setLocale('pt-BR');
-		this.newExpenseForm = this.formBuilder.group({
+		this.expenseForm = this.formBuilder.group({
 			name: [null],
 			value: [null],
 			date: [null],
@@ -64,7 +63,7 @@ export class NewExpensesComponent implements OnInit, OnDestroy {
 	}
 
 	saveExpense(): void {
-		if (this.newExpenseForm.invalid) return;
+		if (this.expenseForm.invalid) return;
 
 		if (this.expense.Identifier !== "") {
 			this.updateExpense();

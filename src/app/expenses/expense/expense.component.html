@@ -8,7 +8,7 @@
                 </div>
                 <div class="card-content">
                     <span class="card-title">Expense: {{ expense.Name }}</span>
-                    <form [formGroup]="newExpenseForm" no-validate (ngSubmit)="saveExpense()">
+                    <form [formGroup]="expenseForm" no-validate (ngSubmit)="saveExpense()">
                         <div class="row">
                             <div class="input-field col s12">
                                 <input id="name" formControlName="name" [(ngModel)]="expense.Name" type="text" class="validate" required autofocus>
