@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
-import { User } from '../login/user.model';
+import { User } from '../shared/login/user.model';
 import { Gain } from '../gains/shared/gain.model';
 import { Expense } from '../expenses/shared/expense.model';
 

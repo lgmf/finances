@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { toast } from 'angular2-materialize';
 import { Expense } from '../shared/expense.model';
-import { User } from '../../login/user.model';
+import { User } from '../../shared/login/user.model';
 
 @Component({
 	selector: 'app-expense',

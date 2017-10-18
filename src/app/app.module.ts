@@ -12,7 +12,7 @@ import { MaterializeModule } from 'angular2-materialize';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './shared/login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { NothingFoundComponent } from './shared/nothing-found/nothing-found.component';
 import { RegisterComponent } from './shared/register/register.component';
