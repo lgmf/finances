@@ -5,15 +5,15 @@ import { Subscription } from 'rxjs/Subscription';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { toast } from 'angular2-materialize';
-import { Gain } from '../gain.model';
+import { Gain } from '../shared/gain.model';
 import { User } from '../../login/user.model';
 
 @Component({
-	selector: 'app-new-gains',
-	templateUrl: './new-gains.component.html',
-	styleUrls: ['./new-gains.component.css']
+	selector: 'app-gain',
+	templateUrl: './gain.component.html',
+	styleUrls: ['./gain.component.css']
 })
-export class NewGainsComponent implements OnInit, OnDestroy {
+export class GainComponent implements OnInit, OnDestroy {
 
 	paramsSubscription: Subscription;
 	gainSubscription: Subscription;
